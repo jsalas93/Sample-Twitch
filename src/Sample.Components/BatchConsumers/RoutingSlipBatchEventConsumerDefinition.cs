@@ -1,8 +1,6 @@
 namespace Sample.Components.BatchConsumers
 {
     using MassTransit;
-    using MassTransit.ConsumeConfigurators;
-    using MassTransit.Definition;
 
 
     public class RoutingSlipBatchEventConsumerDefinition :

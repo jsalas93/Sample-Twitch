@@ -2,10 +2,7 @@ namespace Sample.Components.Consumers
 {
     using System;
     using Contracts;
-    using GreenPipes;
     using MassTransit;
-    using MassTransit.ConsumeConfigurators;
-    using MassTransit.Definition;
 
 
     public class SubmitOrderConsumerDefinition :

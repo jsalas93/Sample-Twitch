@@ -3,7 +3,6 @@ namespace Sample.Components.CourierActivities
     using System;
     using System.Threading.Tasks;
     using MassTransit;
-    using MassTransit.Courier;
     using Warehouse.Contracts;
 
 

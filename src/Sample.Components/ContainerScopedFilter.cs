@@ -3,7 +3,6 @@ namespace Sample.Components
     using System;
     using System.Threading.Tasks;
     using Contracts;
-    using GreenPipes;
     using MassTransit;
 
 

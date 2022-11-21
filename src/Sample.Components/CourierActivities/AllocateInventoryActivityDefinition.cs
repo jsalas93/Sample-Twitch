@@ -1,6 +1,6 @@
 namespace Sample.Components.CourierActivities
 {
-    using MassTransit.Definition;
+    using MassTransit;
 
 
     public class AllocateInventoryActivityDefinition :

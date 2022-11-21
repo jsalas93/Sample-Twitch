@@ -4,9 +4,9 @@ namespace Sample.Components.Tests
     using System.Linq;
     using System.Threading.Tasks;
     using Automatonymous.Graphing;
-    using Automatonymous.Visualizer;
     using Contracts;
     using MassTransit;
+    using MassTransit.SagaStateMachine;
     using MassTransit.Testing;
     using NUnit.Framework;
     using StateMachines;
@@ -173,11 +173,11 @@ namespace Sample.Components.Tests
 
             var graph = orderStateMachine.GetGraph();
 
-            var generator = new StateMachineGraphvizGenerator(graph);
+            //var generator = new StateMachineGraphvizGenerator(graph);
 
-            string dots = generator.CreateDotFile();
+            //string dots = generator.CreateDotFile();
 
-            Console.WriteLine(dots);
+            Console.WriteLine(graph);
 
         }
     }

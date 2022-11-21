@@ -1,8 +1,7 @@
 namespace Sample.Components.StateMachines
 {
     using System;
-    using Automatonymous;
-    using MassTransit.Saga;
+    using MassTransit;
     using MongoDB.Bson.Serialization.Attributes;
 
 

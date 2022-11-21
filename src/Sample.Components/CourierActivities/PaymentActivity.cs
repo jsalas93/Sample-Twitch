@@ -2,7 +2,7 @@ namespace Sample.Components.CourierActivities
 {
     using System;
     using System.Threading.Tasks;
-    using MassTransit.Courier;
+    using MassTransit;
 
 
     public class PaymentActivity :
