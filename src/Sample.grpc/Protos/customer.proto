@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Sample.grpc";
+
+package customer;
+
+service Customer {
+  rpc Delete (CustomerRequest) returns (CustomerResponse);
+}
+
+message CustomerRequest {
+  string id = 1;
+  string customerNumber = 2;
+}
+
+message CustomerResponse {
+  int32 defaultStatusCode = 1;
+}
