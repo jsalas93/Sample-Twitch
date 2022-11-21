@@ -1,7 +1,6 @@
 namespace Warehouse.Components.StateMachines
 {
     using System;
-    using Automatonymous;
     using Contracts;
     using MassTransit;
     using Microsoft.Extensions.Logging;
@@ -26,8 +25,8 @@ namespace Warehouse.Components.StateMachines
 
             Initially(
                 When(AllocationCreated)
-                    .Schedule(HoldExpiration, context => context.Init<AllocationHoldDurationExpired>(new {context.Data.AllocationId}),
-                        context => context.Data.HoldDuration)
+                    .Schedule(HoldExpiration, context => context.Init<AllocationHoldDurationExpired>(new {context.Message.AllocationId}),
+                        context => context.Message.HoldDuration)
                     .TransitionTo(Allocated),
                 When(ReleaseRequested)
                     .TransitionTo(Released)
@@ -35,23 +34,23 @@ namespace Warehouse.Components.StateMachines
 
             During(Allocated,
                 When(AllocationCreated)
-                    .Schedule(HoldExpiration, context => context.Init<AllocationHoldDurationExpired>(new {context.Data.AllocationId}),
-                        context => context.Data.HoldDuration)
+                    .Schedule(HoldExpiration, context => context.Init<AllocationHoldDurationExpired>(new {context.Message.AllocationId}),
+                        context => context.Message.HoldDuration)
             );
 
             During(Released,
                 When(AllocationCreated)
-                    .Then(context => logger.LogInformation("Allocation already released: {AllocationId}", context.Instance.CorrelationId))
+                    .Then(context => logger.LogInformation("Allocation already released: {AllocationId}", context.Saga.CorrelationId))
                     .Finalize()
             );
 
             During(Allocated,
                 When(HoldExpiration.Received)
-                    .Then(context => logger.LogInformation("Allocation expired {AllocationId}", context.Instance.CorrelationId))
+                    .Then(context => logger.LogInformation("Allocation expired {AllocationId}", context.Saga.CorrelationId))
                     .Finalize(),
                 When(ReleaseRequested)
                     .Unschedule(HoldExpiration)
-                    .Then(context => logger.LogInformation("Allocation Release Granted: {AllocationId}", context.Instance.CorrelationId))
+                    .Then(context => logger.LogInformation("Allocation Release Granted: {AllocationId}", context.Saga.CorrelationId))
                     .Finalize()
             );
 

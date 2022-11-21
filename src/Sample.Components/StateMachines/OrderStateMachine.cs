@@ -2,7 +2,6 @@ namespace Sample.Components.StateMachines
 {
     using System;
     using System.Linq;
-    using Automatonymous;
     using Contracts;
     using MassTransit;
     using OrderStateMachineActivities;
@@ -37,11 +36,11 @@ namespace Sample.Components.StateMachines
                 When(OrderSubmitted)
                     .Then(context =>
                     {
-                        context.Instance.SubmitDate = context.Data.Timestamp;
-                        context.Instance.CustomerNumber = context.Data.CustomerNumber;
-                        context.Instance.PaymentCardNumber = context.Data.PaymentCardNumber;
+                        context.Saga.SubmitDate = context.Message.Timestamp;
+                        context.Saga.CustomerNumber = context.Message.CustomerNumber;
+                        context.Saga.PaymentCardNumber = context.Message.PaymentCardNumber;
 
-                        context.Instance.Updated = DateTime.UtcNow;
+                        context.Saga.Updated = DateTime.UtcNow;
                     })
                     .TransitionTo(Submitted));
 
@@ -55,7 +54,7 @@ namespace Sample.Components.StateMachines
 
             During(Accepted,
                 When(FulfillOrderFaulted)
-                    .Then(context => Console.WriteLine("Fulfill Order Faulted: {0}", context.Data.Exceptions.FirstOrDefault()?.Message))
+                    .Then(context => Console.WriteLine("Fulfill Order Faulted: {0}", context.Message.Exceptions.FirstOrDefault()?.Message))
                     .TransitionTo(Faulted),
                 When(FulfillmentFaulted)
                     .TransitionTo(Faulted),
@@ -66,8 +65,8 @@ namespace Sample.Components.StateMachines
                 When(OrderStatusRequested)
                     .RespondAsync(x => x.Init<OrderStatus>(new
                     {
-                        OrderId = x.Instance.CorrelationId,
-                        State = x.Instance.CurrentState
+                        OrderId = x.Saga.CorrelationId,
+                        State = x.Saga.CurrentState
                     }))
             );
 
@@ -75,8 +74,8 @@ namespace Sample.Components.StateMachines
                 When(OrderSubmitted)
                     .Then(context =>
                     {
-                        context.Instance.SubmitDate ??= context.Data.Timestamp;
-                        context.Instance.CustomerNumber ??= context.Data.CustomerNumber;
+                        context.Saga.SubmitDate ??= context.Message.Timestamp;
+                        context.Saga.CustomerNumber ??= context.Message.CustomerNumber;
                     })
             );
         }

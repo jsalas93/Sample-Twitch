@@ -1,8 +1,6 @@
 namespace Sample.Components.StateMachines
 {
-    using GreenPipes;
     using MassTransit;
-    using MassTransit.Definition;
 
 
     public class OrderStateMachineDefinition :

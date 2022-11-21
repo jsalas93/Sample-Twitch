@@ -4,7 +4,6 @@ namespace Sample.Components.Consumers
     using System.Threading.Tasks;
     using Contracts;
     using MassTransit;
-    using MassTransit.Courier;
     using MassTransit.Courier.Contracts;
 
 

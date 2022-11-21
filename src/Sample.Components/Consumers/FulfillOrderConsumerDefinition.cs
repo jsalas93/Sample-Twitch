@@ -1,10 +1,7 @@
 namespace Sample.Components.Consumers
 {
     using System;
-    using GreenPipes;
     using MassTransit;
-    using MassTransit.ConsumeConfigurators;
-    using MassTransit.Definition;
 
 
     public class FulfillOrderConsumerDefinition :

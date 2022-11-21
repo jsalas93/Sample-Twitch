@@ -4,7 +4,6 @@ namespace Sample.Api.Controllers
     using System.Threading.Tasks;
     using Contracts;
     using MassTransit;
-    using MassTransit.MessageData;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
     using Models;

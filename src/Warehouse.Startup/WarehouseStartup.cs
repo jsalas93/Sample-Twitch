@@ -4,12 +4,11 @@
     using Components.StateMachines;
     using MassTransit;
     using MassTransit.ExtensionsDependencyInjectionIntegration;
-    using MassTransit.Platform.Abstractions;
     using Microsoft.Extensions.DependencyInjection;
 
 
-    public class WarehouseStartup :
-        IPlatformStartup
+    public class WarehouseStartup //:
+        //IPlatformStartup
     {
         public void ConfigureMassTransit(IServiceCollectionBusConfigurator configurator, IServiceCollection services)
         {

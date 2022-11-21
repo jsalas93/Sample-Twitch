@@ -8,13 +8,12 @@
     using MassTransit;
     using MassTransit.ExtensionsDependencyInjectionIntegration;
     using MassTransit.MongoDbIntegration.MessageData;
-    using MassTransit.Platform.Abstractions;
     using Microsoft.Extensions.DependencyInjection;
     using Warehouse.Contracts;
 
 
-    public class SampleStartup :
-        IPlatformStartup
+    public class SampleStartup //:
+        //IPlatformStartup
     {
         public void ConfigureMassTransit(IServiceCollectionBusConfigurator configurator, IServiceCollection services)
         {

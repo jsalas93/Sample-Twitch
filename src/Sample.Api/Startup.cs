@@ -4,7 +4,6 @@ namespace Sample.Api
     using Components.Consumers;
     using Contracts;
     using MassTransit;
-    using MassTransit.Definition;
     using MassTransit.MongoDbIntegration.MessageData;
     using Microsoft.ApplicationInsights.DependencyCollector;
     using Microsoft.AspNetCore.Builder;
@@ -67,8 +66,6 @@ namespace Sample.Api
                 options.Delay = TimeSpan.FromSeconds(2);
                 options.Predicate = check => check.Tags.Contains("ready");
             });
-
-            services.AddMassTransitHostedService();
 
             services.AddOpenApiDocument(cfg => cfg.PostProcess = d => d.Info.Title = "Sample API Site");
 
