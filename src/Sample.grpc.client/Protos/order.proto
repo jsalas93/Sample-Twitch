@@ -1,0 +1,53 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Sample.grpc.client";
+
+package order;
+
+service Order {
+  rpc Get (OrderGetRequest) returns (OrderGetResponse);
+  rpc Post (OrderPostRequest) returns (OrderPostResponse);
+  rpc Patch (OrderPatchRequest) returns (OrderPatchResponse);
+  rpc Put (OrderPutRequest) returns (OrderPutResponse);
+}
+
+
+message OrderGetRequest {
+  string id = 1;
+}
+
+message OrderGetResponse {
+  int32 defaultStatusCode = 1;
+  string orderId  = 2;
+  string state = 3;
+}
+
+message OrderPostRequest {
+  string id = 1;
+  string customerNumber = 2;
+  string paymentCardNumber = 3;
+  string notes = 4;
+}
+
+message OrderPostResponse{
+  int32 defaultStatusCode = 1;
+  string OrderId = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  string customerNumber = 4;
+  string detail = 5;
+  string reason = 6;
+}
+message OrderPatchRequest {
+  string id = 1;
+}
+message OrderPatchResponse {
+  int32 defaultStatusCode = 1;
+}
+message OrderPutRequest {
+  string id = 1;
+  string customerNumber = 2;
+}
+message OrderPutResponse {
+  int32 defaultStatusCode = 1;
+}

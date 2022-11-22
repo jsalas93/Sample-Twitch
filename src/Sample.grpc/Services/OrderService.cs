@@ -118,7 +118,7 @@ namespace Sample.grpc.Services
             {
                 OrderId = request.Id,
                 InVar.Timestamp,
-                CustomerNumber = request.CustomerNumber
+                request.CustomerNumber
             });
 
             return await Task.FromResult(new OrderPutResponse
